@@ -1,0 +1,57 @@
+<div class="container">
+  <h2 style="text-align: center; margin: 20px 0">Đây là cửa hàng nhé không phải giỏ hàng đâu</h2>
+  <div class="header">
+    <div class="header--cart">
+      <span class="header--cart_number">{{ total }}</span>
+      <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+    </div>
+  </div>
+  <div class="row" *ngIf="contacts">
+    <div class="col col-md-4 col-lg-4" *ngFor="let item of contacts">
+      <div class="main">
+        <div class="main--title">
+          <img src="{{item.shop_imgUrl}}" alt="{{ item.shop_name }}">
+        </div>
+        <div class="main--title">
+          <h2>{{ item.shop_name }}</h2>
+        </div>
+        <div class="main--description">
+          <p>{{ item.address }}</p>
+        </div>
+        <div class="main--price">
+          <span>{{ item.shop_price }}</span>
+        </div>
+        <div class="main--cart">
+          <button type="button" class="btn btn-outline-warning mt-3" (click)="updatetotal(item)">Add cart</button>
+        </div>
+        <div class="clear-float"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="shops">
+    <h2 style="text-align: center; margin: 20px 0">Đây là giỏ hàng nhé không phải cửa hàng đâu</h2>
+    <div class="col col-md-4 col-lg-4" *ngFor="let item of shops; let io = index">
+      <div class="main">
+        <div class="main--title">
+          <img src="{{item.imgUrl}}" alt="{{ item.name }}">
+        </div>
+        <div class="main--title">
+          <h2>{{ item.name }}</h2>
+        </div>
+        <div class="header--cart" style="margin: 10px 0 0 0; float: right;">
+          <span class="header--cart_number">Số lượng: {{ item.total }}</span>
+        </div>
+        <div class="clear-float"></div>
+        <div class="main--price">
+          <span>{{ item.price }}</span>
+          <input type="number" min="0"  placeholder="0" [(ngModel)]="item.total" (blur)="amounttotal(item)">
+        </div>
+        <div class="main--cart">
+          <button type="button" class="btn btn-outline-warning mt-3" (click)="deletetotal(io)">Delete</button>
+        </div>
+        <div class="clear-float"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
